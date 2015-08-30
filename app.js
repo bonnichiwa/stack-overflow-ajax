@@ -56,9 +56,9 @@ var showAnswerer = function(answerer) {
 	var result = $('.templates .answerer').clone();
 
 	// Set the answerer properties in result 
-	var answererElem = result.find('.answerer-name a');
-	answererElem.attr('href', answerer.link);
-	answererElem.text(answerer.display_name);
+	var displayAnswerer = result.find('.answerer-name a');
+	displayAnswerer.attr('href', answerer.link);
+	displayAnswerer.text(answerer.display_name);
 
 	return result;
 
@@ -112,23 +112,22 @@ var getUnanswered = function(tags) {
 };
 
 
-var getInspiration = function(tags) {
+var getInspiration = function(answerers) {
 	// the parameters we need to pass in our request to StackOverflow's API
-	var request = {tagged: tags,
+	var request = {tagged: answerers,
 								site: 'stackoverflow',
-								order: 'desc',
-								sort: 'creation'};
+								period: 'all_time'};
 
 	var result = $.ajax({
-		url: "http://api.stackexchange.com/2.2/top-answerers",
+		url: "http://api.stackexchange.com/2.2/tags/" + request.tagged + "/top-answerers/" + request.period,
 		data: request,
-		dataType: "jsonp"
+		dataType: "jsonp",
 		type: "GET",
 	})
 	.done(function(result){
 		var searchResults = showSearchResults(request.tagged, result.items.length);
 
-		$('.search-results.html'(searchResults);
+		$('.search-results').html(searchResults);
 
 		$.each(result.items, function (i, item) {
 			var answerer = showAnswerer(item);
