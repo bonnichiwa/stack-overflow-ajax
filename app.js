@@ -52,7 +52,17 @@ var showQuestion = function(question) {
 
 var showAnswerer = function(answerer) {
 
-}
+	// clone the result template code
+	var result = $('.templates .answerer').clone();
+
+	// Set the answerer properties in result 
+	var answererElem = result.find('.answerer-name a');
+	answererElem.attr('href', answerer.link);
+	answererElem.text(answerer.display_name);
+
+	return result;
+
+};
 
 
 // this function takes the results object from StackOverflow
@@ -102,7 +112,7 @@ var getUnanswered = function(tags) {
 };
 
 
-var getInspiration = function(answerers) {
+var getInspiration = function(tags) {
 	// the parameters we need to pass in our request to StackOverflow's API
 	var request = {tagged: tags,
 								site: 'stackoverflow',
