@@ -60,6 +60,15 @@ var showAnswerer = function(answerer) {
 	displayAnswerer.attr('href', answerer.user.link);
 	displayAnswerer.text(answerer.user.display_name);
 
+	var displayPicture = result.find('.answerer-profile img');
+	displayPicture.attr('src', answerer.user.profile_image);
+
+	var reputation = result.find('.answerer-reputation');
+	reputation.text(answerer.user.reputation);
+
+	var postCount = result.find('.answerer-posts');
+	postCount.text(answerer.post_count);
+
 	return result;
 
 };
