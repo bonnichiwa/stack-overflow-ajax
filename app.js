@@ -17,6 +17,22 @@ $(document).ready( function() {
 
 });
 
+// this function takes the results object from StackOverflow
+// and creates info about search results to be appended to DOM
+var showSearchResults = function(query, resultNum) {
+	var results = resultNum + ' results for <strong>' + query;
+	return results;
+};
+
+// takes error string and turns it into displayable DOM element
+var showError = function(error){
+	var errorElem = $('.templates .error').clone();
+	var errorText = '<p>' + error + '</p>';
+	errorElem.append(errorText);
+};
+
+// ---------- Unanswered Questions Section ---------- // 
+
 // this function takes the question object returned by StackOverflow 
 // and creates new result to be appended to DOM
 var showQuestion = function(question) {
@@ -48,47 +64,6 @@ var showQuestion = function(question) {
 	);
 
 	return result;
-};
-
-var showAnswerer = function(answerer) {
-
-	// clone the result template code
-	var result = $('.templates .answerer').clone();
-
-	// Set the answerer properties in result 
-	var displayAnswerer = result.find('.answerer-name a');
-	displayAnswerer.attr('href', answerer.user.link);
-	displayAnswerer.text(answerer.user.display_name);
-
-	var displayPicture = result.find('.answerer-profile img');
-	displayPicture.attr('src', answerer.user.profile_image);
-
-	var reputation = result.find('.answerer-reputation');
-	reputation.text(answerer.user.reputation);
-
-	var postCount = result.find('.answerer-posts');
-	postCount.text(answerer.post_count);
-
-	var score = result.find('.score');
-	score.text(answerer.score);
-
-	return result;
-
-};
-
-
-// this function takes the results object from StackOverflow
-// and creates info about search results to be appended to DOM
-var showSearchResults = function(query, resultNum) {
-	var results = resultNum + ' results for <strong>' + query;
-	return results;
-};
-
-// takes error string and turns it into displayable DOM element
-var showError = function(error){
-	var errorElem = $('.templates .error').clone();
-	var errorText = '<p>' + error + '</p>';
-	errorElem.append(errorText);
 };
 
 // takes a string of semi-colon separated tags to be searched
@@ -123,6 +98,34 @@ var getUnanswered = function(tags) {
 	});
 };
 
+
+// ---------- Get Inspiration Section ---------- //
+
+var showAnswerer = function(answerer) {
+
+	// clone the result template code
+	var result = $('.templates .answerer').clone();
+
+	// Set the answerer properties in result 
+	var displayAnswerer = result.find('.answerer-name a');
+	displayAnswerer.attr('href', answerer.user.link);
+	displayAnswerer.text(answerer.user.display_name);
+
+	var displayPicture = result.find('.answerer-profile img');
+	displayPicture.attr('src', answerer.user.profile_image);
+
+	var reputation = result.find('.answerer-reputation');
+	reputation.text(answerer.user.reputation);
+
+	var postCount = result.find('.answerer-posts');
+	postCount.text(answerer.post_count);
+
+	var score = result.find('.score');
+	score.text(answerer.score);
+
+	return result;
+
+};
 
 var getInspiration = function(answerers) {
 	// the parameters we need to pass in our request to StackOverflow's API
