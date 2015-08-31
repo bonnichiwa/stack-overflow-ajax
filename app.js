@@ -57,8 +57,8 @@ var showAnswerer = function(answerer) {
 
 	// Set the answerer properties in result 
 	var displayAnswerer = result.find('.answerer-name a');
-	displayAnswerer.attr('href', answerer.link);
-	displayAnswerer.text(answerer.display_name);
+	displayAnswerer.attr('href', answerer.user.link);
+	displayAnswerer.text(answerer.user.display_name);
 
 	return result;
 
