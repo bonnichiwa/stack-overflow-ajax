@@ -69,6 +69,9 @@ var showAnswerer = function(answerer) {
 	var postCount = result.find('.answerer-posts');
 	postCount.text(answerer.post_count);
 
+	var score = result.find('.score');
+	score.text(answerer.score);
+
 	return result;
 
 };
